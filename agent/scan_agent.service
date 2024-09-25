@@ -1,0 +1,19 @@
+[Unit]
+Description=agent Service
+After=multi-user.target
+Wants=graphical.target
+
+[Service]
+WorkingDirectory=/home/sch/devlopment/agent
+#Environment=PATH=/home/sch/devlopment/agent/venv/bin:$PATH
+ExecStart=/home/sch/devlopment/agent/venv/bin/python3 detect_agent.py
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+RestartSec=0
+Type=simple
+User=sch
+
+[Install]
+WantedBy=graphical.target
+Alias=agent.service
