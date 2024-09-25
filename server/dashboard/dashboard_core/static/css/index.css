@@ -1,0 +1,25 @@
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+
+.table th {
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.shadow-deny {
+	box-shadow: 0 0 5px 5px rgba(255,99,132,0.2) !important;
+}
+
+#notifications {
+    cursor: pointer;
+    position: fixed;
+    right: 0px;
+    z-index: 9999;
+    bottom: 0px;
+    margin-bottom: 22px;
+    margin-right: 15px;
+    max-width: 1000px;
+}

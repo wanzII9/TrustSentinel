@@ -1,0 +1,53 @@
+		{% if slave_list %}
+		{% csrf_token %}
+			{% for slave in slave_list %}
+				{% if slave.slave_status %}
+				<div class="card shadow" style="margin-bottom: 2rem;">
+				{% else %}
+				<div class="card shadow-deny" style="margin-bottom: 2rem;">
+				{% endif %}
+					<div class="d-flex justify-content-between align-items-center p-3">            		
+						<div class="d-flex flex-row align-items-center">
+							<div class="ms-2 c-details">
+								<h5 class="mb-0" style="font-weight: bold;">Slave {{ slave.slave_id }}</h5> 
+								<span style="font-size: 14px; color: #888888;">PLC Slave Number</span>
+							</div>
+						</div>
+						<div class="d-flex align-items-center">
+							<span class="badge rounded-pill bg-light text-dark" style="font-size: 1rem;">온도</span>
+							<div class="vr" style="margin-right: .7rem;"></div>
+							<span class="badge rounded-pill" style="padding-right: 1.5rem; padding-left: 1.5rem; margin-right: 30px; font-size: 1rem;background-color: rgba(255,206,86,0.2); color: #e68900; width: 80px">{{ slave.slave_temp }}</span>
+							<span class="badge rounded-pill bg-light text-dark" style="font-size: 1rem;">상태</span>
+							<div class="vr" style="margin-right: .7rem"></div>
+							{% if slave.slave_status %}
+							<span class="badge rounded-pill" style="font-size: 1rem; background-color: rgba(75, 192, 192, 0.2); color: #004d00; width: 80px;">등록</span>
+							{% else %}
+							<span class="badge rounded-pill" style="font-size: 1rem; background-color: rgba(255, 99, 132, 0.2); color: #e5586c; width: 80px;">미등록</span>
+							{% endif %}
+						</div>
+					</div>                  
+					<div class="card-body">
+						<div class="row" style="margin-right: 5px; margin-left: 5px;">
+							<table class="table align-items-center table-flush">
+								<thead class="table-light">
+									<tr class="text-center">
+										<th>제조사</th>
+										<th>제품명</th>
+										<th>버전</th>
+										<th>식별자</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="text-center">
+										<td class="col-md-3">{{ slave.slave_vendor }}</td>
+										<td class="col-md-3">{{ slave.slave_product }}</td>
+										<td class="col-md-3">{{ slave.slave_version }}</td>
+										<td class="col-md-3">{{ slave.product_id }}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		{% endif %}

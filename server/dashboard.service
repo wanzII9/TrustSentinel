@@ -1,0 +1,19 @@
+[Unit]
+Description=Dashboard Service
+After=multi-user.target
+Wants=graphical.target
+
+[Service]
+WorkingDirectory=/home/sch/devlopment/server/dashboard
+Environment=PATH=/home/sch/devlopment/server/venv/bin:$PATH
+ExecStart=/home/sch/devlopment/server/venv/bin/python3 manage.py runserver 0.0.0.0:8000
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+RestartSec=0
+Type=simple
+User=sch
+
+[Install]
+WantedBy=graphical.target
+Alias=dashboard.service

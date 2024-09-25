@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block scripts %}    <!-- 페이지별 스크립트 공간 -->
+<script>
+    var plc_arr = new Array();
+</script>
+{% endblock scripts %}
+
+{% block css %}        <!-- 페이지별 css -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="d-flex">
+	<div class="left-plcview">
+	{% include 'plc_view.html' %}
+	</div>
+	<!-- 카드 -->
+	<div class="container" style="max-width: 1440px;">
+		<div class="right-slaveview">
+	{% include 'slave_view.html' %}
+		</div>
+	</div>
+</div>
+<div id="notifications"></div>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/notify.js' %}"></script>
+<script src="{% static 'js/loop_slave.js' %}"></script>
+<script>
+$(document).ready(function() {
+    const urlStr = window.location.href;
+	const url = new URL(urlStr);
+	const urlParams = url.searchParams;
+	const plc_id = urlParams.get('plc_id');
+	var slave_cnt = 0;
+	setInterval(list_call, 3000)
+    function list_call() {
+        $.ajax({
+			url: "/slave_view?plc_id="+plc_id,
+            type: "GET",
+            success: function (result) {
+                document.querySelector(".right-slaveview").innerHTML = result;
+            }
+        })
+	}
+})
+</script>
+{% endblock %}

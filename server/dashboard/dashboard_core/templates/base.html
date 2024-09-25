@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        {% block title %}      <!-- 페이지별 타이틀 공간 -->
+        <title>TrustSentinel</title>
+        {% endblock title %}
+
+        {% block meta %}    <!-- 페이지별 메타 데이터 공간 -->
+        <link rel="shortcut icon" href="#">
+        {% endblock meta %}
+
+        {% block scripts %}    <!-- 페이지별 스크립트 공간 -->
+        <script>
+        $.ajaxSetup({
+            headers: { "X-CSRFToken": '{{csrf_token}}' }
+        });
+        </script>
+        {% endblock scripts %}
+
+        {% block css %}        <!-- 페이지별 css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        {% endblock css %}
+
+		<!-- FONT LINK -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+		<style>
+			* {
+				font-family: 'Noto Sans KR', sans-serif;
+  		  	  }
+		</style>
+
+
+    </head>
+    <body>
+    {% block header %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" style="margin-bottom: 30px">
+            <div class="container-fluid">
+			<a class="navbar-brand" href="/"><img src="{% static 'images/security-ci.png' %}" width="130" height="40" class="d-inline-block align-top" alt=""/></a>
+			<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent"
+					aria-expanded="false"
+					aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+            </div>
+        </nav>
+    {% endblock header %}
+    {% block content %}
+    {% endblock content %}
+    </body>
+</html>
